@@ -309,7 +309,7 @@
 <td><p>Returns the underlying c2pa-rs/c2pa-c-ffi version string</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#c2pa.read_ingredient_file" title="c2pa.read_ingredient_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_ingredient_file</span></code></a>(path, data_dir)</p></td>
-<td><p>Read a file as C2PA ingredient.</p></td>
+<td><p>Read a file as C2PA ingredient (deprecated).</p></td>
 </tr>
 </tbody>
 </table>
@@ -461,6 +461,11 @@ invalid UTF-8 characters</p></li>
 </ul>
 </dd>
 </dl>
+<p class="rubric">Example</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>with open(ingredient_file_path, &#39;rb&#39;) as f:
+    builder.add_ingredient(ingredient_json, &quot;image/jpeg&quot;, f)
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -490,7 +495,7 @@ contains invalid UTF-8 characters</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="c2pa.Builder.add_ingredient_from_file_path">
 <span class="sig-name descname"><span class="pre">add_ingredient_from_file_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ingredient_json</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#c2pa.Builder.add_ingredient_from_file_path" title="Link to this definition">¶</a></dt>
-<dd><p>Add an ingredient from a file path to the builder.
+<dd><p>Add an ingredient from a file path to the builder (deprecated).
 This is a legacy method.</p>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">Deprecated since version 0.13.0: </span>This method is deprecated and will be removed in a future version.
@@ -714,6 +719,11 @@ the extension.</p></li>
 <dt class="sig sig-object py" id="c2pa.Reader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">c2pa.</span></span><span class="sig-name descname"><span class="pre">Reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format_or_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manifest_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#c2pa.Reader" title="Link to this definition">¶</a></dt>
 <dd><p>High-level wrapper for C2PA Reader operations.</p>
+<p class="rubric">Example</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>with Reader(path) as reader:
+    manifest_json = reader.json()
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -995,27 +1005,12 @@ Multiple calls to close() are handled gracefully.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="c2pa.read_ingredient_file">
 <span class="sig-prename descclassname"><span class="pre">c2pa.</span></span><span class="sig-name descname"><span class="pre">read_ingredient_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#c2pa.read_ingredient_file" title="Link to this definition">¶</a></dt>
-<dd><p>Read a file as C2PA ingredient.
+<dd><p>Read a file as C2PA ingredient (deprecated).
 This creates the JSON string that would be used as the ingredient JSON.</p>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">Deprecated since version 0.11.0: </span>This function is deprecated and will be removed in a future version.
-Please use the Reader class for reading C2PA metadata instead.
-Example:
-    .. code-block:: python</p>
-<blockquote>
-<div><dl class="simple">
-<dt>with Reader(path) as reader:</dt><dd><p>manifest_json = reader.json()</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>To add ingredients to a manifest, please use the Builder class.
-Example:</p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ingredient_file_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">builder</span><span class="o">.</span><span class="n">add_ingredient</span><span class="p">(</span><span class="n">ingredient_json</span><span class="p">,</span> <span class="s2">&quot;image/jpeg&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-</pre></div>
-</div>
-</div></blockquote>
+To read C2PA metadata, use the <a class="reference internal" href="c2pa/index.html#c2pa.c2pa.Reader" title="c2pa.c2pa.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">c2pa.c2pa.Reader</span></code></a> class.
+To add ingredients to a manifest, use <a class="reference internal" href="c2pa/index.html#c2pa.c2pa.Builder.add_ingredient" title="c2pa.c2pa.Builder.add_ingredient"><code class="xref py py-meth docutils literal notranslate"><span class="pre">c2pa.c2pa.Builder.add_ingredient()</span></code></a>.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
